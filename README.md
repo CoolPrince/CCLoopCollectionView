@@ -19,7 +19,7 @@ v.pageControlTintColor = UIColor.cyan   //UIPageControl其它颜色
 
 v.getClickedIndex { (index) in   //获取当前点击的item的index
 
-    print("2--- = \(index)")
+    print("1--- = \(index)")
     
 }
 
