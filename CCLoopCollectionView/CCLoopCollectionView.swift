@@ -174,8 +174,10 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
         return cell!
     }
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let index = (indexPath.item - 1) >= 0 ? (indexPath.item - 1) : 0
-        currentBlock!(index)
+        if currentBlock != nil {
+            let index = (indexPath.item - 1) >= 0 ? (indexPath.item - 1) : 0
+            currentBlock!(index)
+        }
     }
     
     
