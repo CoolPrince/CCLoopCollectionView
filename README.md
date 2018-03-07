@@ -11,9 +11,15 @@ v.enableAutoScroll = true   //是否开始自动循环
 
 v.timeInterval = 2.0   //循环间隔时间
 
+v.showPageControl = false   //是否显示UIPageControl
+
 v.currentPageControlColor = UIColor.brown   //UIPageControl当前颜色
 
 v.pageControlTintColor = UIColor.cyan   //UIPageControl其它颜色
+
+v.getClickedIndex { (index) in   //获取当前点击的item的index
+    print("1--- = \(index)")
+}
 
 view.addSubview(v)   //添加到父视图
 
@@ -36,4 +42,8 @@ v.timeInterval = 2.0   //循环间隔时间
 v.currentPageControlColor = UIColor.red   //UIPageControl当前颜色
 
 v.pageControlTintColor = UIColor.black   //UIPageControl其它颜色
+
+v.getClickedIndex { (index) in   //获取当前点击的item的index
+    print("2--- = \(index)")
+}
 
