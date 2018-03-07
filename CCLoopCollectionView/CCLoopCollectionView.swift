@@ -52,10 +52,6 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
             }
         }
     }
-    /// 图片的宽度
-    let AD_WIDTH: CGFloat = 375.0
-    /// 图片的高度
-    let AD_HEIGHT: CGFloat = 160.0
     /// 是否显示UIPageControl，默认显示
     public var showPageControl = true {
         didSet {
@@ -150,7 +146,6 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
         return contentAry.count
     }
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width * AD_HEIGHT / AD_WIDTH)
         return CGSize(width: currentFrame.size.width, height: currentFrame.size.height)
     }
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
