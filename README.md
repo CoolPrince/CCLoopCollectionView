@@ -11,7 +11,7 @@ v.enableAutoScroll = true   //是否开始自动循环
 
 v.timeInterval = 2.0   //循环间隔时间
 
-v.showPageControl = false   //是否显示UIPageControl
+v.showPageControl = false   //是否显示UIPageControl，默认显示
 
 v.currentPageControlColor = UIColor.brown   //UIPageControl当前颜色
 
