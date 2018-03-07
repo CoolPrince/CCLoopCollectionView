@@ -9,6 +9,8 @@
 import UIKit
 import SDWebImage
 
+public typealias SelectItemBlock = (Int) -> Void
+
 public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private var mCollectionView: UICollectionView!
@@ -54,6 +56,14 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
     let AD_WIDTH: CGFloat = 375.0
     /// 图片的高度
     let AD_HEIGHT: CGFloat = 160.0
+    /// 是否显示UIPageControl，默认显示
+    public var showPageControl = true {
+        didSet {
+            if loopPageControl != nil && showPageControl == false {
+                loopPageControl.isHidden = true
+            }
+        }
+    }
     /// UIPageControl当前颜色
     public var currentPageControlColor: UIColor? {
         didSet {
@@ -70,6 +80,7 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
             }
         }
     }
+    var currentBlock: SelectItemBlock?
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -113,11 +124,13 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
         }
         
         //loopPageControl
-        loopPageControl = UIPageControl(frame: CGRect(x: currentFrame.origin.x, y: currentFrame.origin.y+currentFrame.size.height-37.0, width: currentFrame.size.width, height: 37.0))
-        loopPageControl.numberOfPages = contentAry.count > 1 ? (contentAry.count - 2) : 1
-        loopPageControl.currentPageIndicatorTintColor = currentPageControlColor
-        loopPageControl.pageIndicatorTintColor = pageControlTintColor
-        self.superview?.addSubview(loopPageControl)
+        if showPageControl {
+            loopPageControl = UIPageControl(frame: CGRect(x: currentFrame.origin.x, y: currentFrame.origin.y+currentFrame.size.height-37.0, width: currentFrame.size.width, height: 37.0))
+            loopPageControl.numberOfPages = contentAry.count > 1 ? (contentAry.count - 2) : 1
+            loopPageControl.currentPageIndicatorTintColor = currentPageControlColor
+            loopPageControl.pageIndicatorTintColor = pageControlTintColor
+            self.superview?.addSubview(loopPageControl)
+        }
         
         
         // 是否开启自动循环
@@ -166,7 +179,8 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
         return cell!
     }
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let index = (indexPath.item - 1) >= 0 ? (indexPath.item - 1) : 0
+        currentBlock!(index)
     }
     
     
@@ -238,7 +252,19 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
             mCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
         }
     }
+    
+    
+    /// 获取当前点击的item的index
+    ///
+    /// - Parameter index: index
+    public func getClickedIndex(index: @escaping SelectItemBlock) {
+        currentBlock = index
+    }
 }
+
+
+
+
 
 class LoopCollectionViewCell: UICollectionViewCell {
     var contentImageView: UIImageView?
