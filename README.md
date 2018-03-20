@@ -8,6 +8,7 @@ pod 'AFNetworking'
 
 
 二、使用方法：
+
 1.纯代码：
 
 let v = CCLoopCollectionView(frame: CGRect(x: 30, y: 60, width: 175, height: 100))   //根据frame创建view
@@ -37,9 +38,9 @@ view.addSubview(v)   //添加到父视图
 
 2.storyboard：
 
-1.拖拽一个UIView到VC上，将其class改为CCLoopCollectionView，并赋值IBOutlet，命名为v。
+①拖拽一个UIView到VC上，将其class改为CCLoopCollectionView，并赋值IBOutlet，命名为v。
 
-2.在对应的swift文件中添加如下代码：
+②在对应的swift文件中添加如下代码：
 
 
 v.contentAry = tempAry as [AnyObject]   //给轮播图赋值内容（可以为UIImage或UIString）
