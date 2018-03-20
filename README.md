@@ -1,7 +1,14 @@
 # CCLoopCollectionView
 Loop UICollectionView(include UIPageControl) for swift.
 
-一、纯代码：
+
+一、安装方法：
+
+pod 'AFNetworking'
+
+
+二、使用方法：
+1.纯代码：
 
 let v = CCLoopCollectionView(frame: CGRect(x: 30, y: 60, width: 175, height: 100))   //根据frame创建view
 
@@ -28,7 +35,7 @@ view.addSubview(v)   //添加到父视图
 
 
 
-二、storyboard：
+2.storyboard：
 
 1.拖拽一个UIView到VC上，将其class改为CCLoopCollectionView，并赋值IBOutlet，命名为v。
 
