@@ -4,7 +4,7 @@ Loop UICollectionView(include UIPageControl) for swift.
 
 一、安装方法：
 
-pod 'AFNetworking'
+pod 'CCLoopCollectionView'
 
 
 二、使用方法：
