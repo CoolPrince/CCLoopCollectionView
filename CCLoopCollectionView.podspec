@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CCLoopCollectionView"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "Loop UICollectionView(include UIPageControl) for swift."
 
   # This description is used to generate tags and improve search results.

@@ -32,7 +32,9 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
                 loopPageControl.numberOfPages = contentAry.count > 1 ? (contentAry.count - 2) : 1
                 
                 mCollectionView.reloadData()
-                mCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: false)
+                if currentIndex < contentAry.count {                    
+                    mCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: false)
+                }
             }
         }
     }
@@ -115,7 +117,7 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
         mCollectionView.isPagingEnabled = true
         mCollectionView.showsHorizontalScrollIndicator = false
         self.superview?.addSubview(mCollectionView)
-        if mCollectionView.numberOfItems(inSection: 0) > 0 {
+        if mCollectionView.numberOfItems(inSection: 0) > 1 {
             mCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: false)
         }
         
@@ -237,7 +239,9 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
             scrollTimer.invalidate()
             scrollTimer = nil
         }
-        scrollTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(autoScrollAction(timer:)), userInfo: nil, repeats: true)
+        if contentAry.count > 1 {
+            scrollTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(autoScrollAction(timer:)), userInfo: nil, repeats: true)
+        }
     }
     
     @objc func autoScrollAction(timer: Timer) {
