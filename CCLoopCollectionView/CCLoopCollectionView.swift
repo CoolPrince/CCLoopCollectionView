@@ -38,6 +38,7 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
             }
         }
     }
+    public var imageShowMode: UIViewContentMode = .scaleToFill
     /// 是否开始自动循环
     public var enableAutoScroll = false {
         didSet {
@@ -90,8 +91,6 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        
-        currentFrame = frame
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -99,10 +98,14 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
     }
     
     override public func didMoveToSuperview() {
+    }
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
         if currentFrame == nil {
-            currentFrame = frame
+            currentFrame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
+            initAllViews(frame: currentFrame)
         }
-        initAllViews(frame: currentFrame)
     }
     func initAllViews(frame: CGRect) {
         // 图片循环UICollectionView
@@ -116,7 +119,7 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
         mCollectionView.backgroundColor = UIColor.white
         mCollectionView.isPagingEnabled = true
         mCollectionView.showsHorizontalScrollIndicator = false
-        self.superview?.addSubview(mCollectionView)
+        self.addSubview(mCollectionView)
         if mCollectionView.numberOfItems(inSection: 0) > 1 {
             mCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: false)
         }
@@ -127,7 +130,7 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
             loopPageControl.numberOfPages = contentAry.count > 1 ? (contentAry.count - 2) : 1
             loopPageControl.currentPageIndicatorTintColor = currentPageControlColor
             loopPageControl.pageIndicatorTintColor = pageControlTintColor
-            self.superview?.addSubview(loopPageControl)
+            self.addSubview(loopPageControl)
         }
         
         
@@ -172,6 +175,7 @@ public class CCLoopCollectionView: UIView, UICollectionViewDataSource, UICollect
         else if let realContent = content as? String, !realContent.hasPrefix("http") {
             cell?.contentImageView?.sd_setImage(with: URL(fileURLWithPath: realContent), placeholderImage: nil)
         }
+        cell?.contentImageView?.contentMode = imageShowMode
         
         return cell!
     }
@@ -275,6 +279,14 @@ class LoopCollectionViewCell: UICollectionViewCell {
         
         contentImageView = UIImageView(frame: CGRect(x: 0, y: frame.origin.y, width: frame.size.width, height: frame.size.height))
         self.addSubview(contentImageView!)
+//        contentImageView!.mas_makeConstraints({ (make) in
+//            if let superview = superview {
+//                make!.top.equalTo()(superview.mas_top)
+//                make!.left.equalTo()(superview.mas_left)
+//                make!.bottom.equalTo()(superview.mas_bottom)
+//                make!.right.equalTo()(superview.mas_right)
+//            }
+//        })
     }
     
     required init?(coder aDecoder: NSCoder) {

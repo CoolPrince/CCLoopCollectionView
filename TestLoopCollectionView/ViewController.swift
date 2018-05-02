@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         
         //code
         //根据frame创建view
-        let v = CCLoopCollectionView(frame: CGRect(x: 30, y: 60, width: 175, height: 100))
+        let v = CCLoopCollectionView(frame: CGRect(x: 30, y: 60, width: 175, height: 10))
         //给轮播图赋值内容（可以为UIImage或UIString）
         v.contentAry = tempAry as [AnyObject]
         //是否开始自动循环
@@ -43,17 +43,20 @@ class ViewController: UIViewController {
         v.currentPageControlColor = UIColor.brown
         //UIPageControl其它颜色
         v.pageControlTintColor = UIColor.cyan
+        //设置图片显示模式
+        v.imageShowMode = .scaleAspectFill
         //添加到父视图
         view.addSubview(v)
         
         
         //storyboard
         adView.contentAry = tempAry as [AnyObject]
-        adView.isHidden = true
+//        adView.isHidden = true
         adView.enableAutoScroll = true
         adView.timeInterval = 2.0
         adView.currentPageControlColor = UIColor.red
         adView.pageControlTintColor = UIColor.black
+        adView.imageShowMode = .scaleAspectFit
         adView.getClickedIndex { (index) in
             print("clicked index = \(index)")
         }
