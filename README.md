@@ -19,6 +19,8 @@ v.enableAutoScroll = true   //是否开始自动循环
 
 v.timeInterval = 2.0   //循环间隔时间
 
+v.imageShowMode = .scaleToFill   //默认模式
+
 v.showPageControl = false   //是否显示UIPageControl，默认显示
 
 v.currentPageControlColor = UIColor.brown   //UIPageControl当前颜色
@@ -48,6 +50,8 @@ v.contentAry = tempAry as [AnyObject]   //给轮播图赋值内容（可以为UI
 v.enableAutoScroll = true   //是否开始自动循环
 
 v.timeInterval = 2.0   //循环间隔时间
+
+v.imageShowMode = .scaleToFill   //默认模式
 
 v.currentPageControlColor = UIColor.red   //UIPageControl当前颜色
 
